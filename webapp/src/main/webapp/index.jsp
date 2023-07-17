@@ -1,31 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<script> 
-function validateEmail(emailId)
-{
-var mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-if(emailId.value.match(mailformat))
-{
-document.form1.text1.focus();
-return true;
+<script>
+function validateForm() {
+  var x = document.forms["myForm"]["email"].value;
+  var atpos = x.indexOf("@");
+  var dotpos = x.lastIndexOf(".");
+  if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
+    alert("Not a valid e-mail address");
+    return false;
+  }
 }
-else
-{
-alert("Invalid email address.");
-document.form1.text1.focus();
-return false;
-}
-}    
-</script> 
+</script>
 </head>
 <body>
-<div>
-<h2>JavaScript email validation</h2>
-<form name="form1" action="#"> 
-Email: <input type='text' name='email'/></br></br>
-<input type="submit" name="submit" value="Submit" onclick="validateEmail(document.form1.email)"/>
+
+<form name="myForm" action="/action_page.php" onsubmit="return validateForm();" method="post">
+  Email: <input type="text" name="email">
+  <input type="submit" value="Submit">
 </form>
-</div>
+
 </body>
 </html>
